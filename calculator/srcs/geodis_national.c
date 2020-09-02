@@ -14,9 +14,9 @@ void		get_price()
 	int			i_dep;
 	int			i_arr;
 	int			i_wei;
+	int			i_area;
 	gboolean	corse;
 	gboolean	express;
-	int			i_area;
 	char		buffer_area[20];
 	char		buffer_price_ha[40];
 	char		buffer_price[80];
@@ -27,6 +27,12 @@ void		get_price()
 	i_arr = atoi((char*)gtk_entry_get_text(GTK_ENTRY(arr)));
 	i_wei = atoi((char*)gtk_entry_get_text(GTK_ENTRY(weight)));
 	express = gtk_toggle_button_get_active((GtkToggleButton*)express_button);
+	if (i_dep < 1 || i_dep > 95 || i_arr < 1 || i_arr > 95 || i_wei < 0)
+	{
+		snprintf(buffer_area, sizeof(buffer_area), "Erreur\nSaisie");
+		gtk_label_set_text(GTK_LABEL(display_area), buffer_area);
+		return ;
+	}
 
 	i_area = zone(i_dep, i_arr, express);
 	snprintf(buffer_area, sizeof(buffer_area), "Zone\n    %d", i_area);
@@ -46,47 +52,40 @@ void		get_price()
 	gtk_label_set_text(GTK_LABEL(display_price), buffer_price);
 }
 
-GtkWidget	*geodis_national(GtkWidget *window)
+GtkWidget	*geodis_national(GtkWidget *grid)
 {
 	GtkWidget	*calculate_button;
-	GtkWidget	*grid;
-	GtkWidget	*depart;
 
-	grid = gtk_grid_new();
-	gtk_grid_set_column_spacing((GtkGrid*)grid, 10);
-	gtk_grid_set_row_spacing((GtkGrid*)grid, 5);
-	gtk_container_add(GTK_CONTAINER(window), grid);
-
-	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("Geodis National"), 2, -2, 1, 8);
+	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\n\nGeodis National"), 2, 0, 1, 1);
 
 	dep = gtk_entry_new();
 	gtk_entry_set_max_length((GtkEntry*)dep, 2);
-	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\tCode postal de depart"), 0, 5, 1, 8);
-	gtk_grid_attach(GTK_GRID(grid), dep, 0, 5, 1, 8);
+	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\tCode postal de depart"), 0, 5, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), dep, 0, 5, 1, 1);
 
 	arr = gtk_entry_new();
 	gtk_entry_set_max_length((GtkEntry*)arr, 2);
-	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\tCode postal d'arrivée"), 1, 5, 1, 8);
-	gtk_grid_attach(GTK_GRID(grid), arr, 1, 5, 1, 8);
+	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\tCode postal d'arrivée"), 1, 5, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), arr, 1, 5, 1, 1);
 
 	weight = gtk_entry_new();
 	gtk_entry_set_max_length((GtkEntry*)weight, 3);
-	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\t\t\tPoids (KG)"), 2, 5, 1, 8);
-	gtk_grid_attach(GTK_GRID(grid), weight, 2, 5, 1, 8);
+	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\t\t\tPoids (KG)"), 2, 5, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), weight, 2, 5, 1, 1);
 
 	express_button = gtk_toggle_button_new_with_label("EXP");
-	gtk_grid_attach(GTK_GRID(grid), express_button, 3, 5, 1, 8);
+	gtk_grid_attach(GTK_GRID(grid), express_button, 3, 5, 1, 1);
 
 	calculate_button = gtk_button_new_with_label("Calculer");
 	g_signal_connect(calculate_button, "clicked", G_CALLBACK(get_price), NULL);
-	gtk_grid_attach(GTK_GRID(grid), calculate_button, 4, 5, 1, 8);
+	gtk_grid_attach(GTK_GRID(grid), calculate_button, 4, 5, 1, 1);
 
-	display_area = gtk_label_new("Zone\n    0");
-	gtk_grid_attach(GTK_GRID(grid), display_area, 5, 5, 1, 8);
+	display_area = gtk_label_new("Zone\n");
+	gtk_grid_attach(GTK_GRID(grid), display_area, 5, 5, 1, 1);
 	display_price_ha = gtk_label_new("Cout d'achat :\n    0.00 €");
-	gtk_grid_attach(GTK_GRID(grid), display_price_ha, 6, 5, 1, 8);
+	gtk_grid_attach(GTK_GRID(grid), display_price_ha, 6, 5, 1, 1);
 	display_price = gtk_label_new("Prix de vente HT   : 0.00 €\nPrix de vente TTC : 0.00 €");
-	gtk_grid_attach(GTK_GRID(grid), display_price, 7, 5, 1, 8);
+	gtk_grid_attach(GTK_GRID(grid), display_price, 7, 5, 1, 1);
 
-	return (window);
+	return (grid);
 }
