@@ -40,7 +40,7 @@ void		get_price()
 
 	corse = i_dep == 20 || i_arr == 20 ? 1 : 0;
 	price = tarif(i_area, i_wei, express, corse);
-	price = express ? (price * 1.13) + 11 : (price * 1.13) + 2.99;
+	price = express ? (price * 1.13) + 11.99 : (price * 1.13) + 2.99;
 	snprintf(buffer_price_ha, sizeof(buffer_price_ha), "Cout d'achat :\n    %.2lf €", price);
 	gtk_label_set_text(GTK_LABEL(display_price_ha), buffer_price_ha);
 

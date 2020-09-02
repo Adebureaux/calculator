@@ -2,16 +2,16 @@
 
 static double	multiplier;
 
-int		calcPoids(int poids, int volume)
+int		calcPoids(int poids, double volume)
 {
 		int		tranchePoids = 0;
 		double	poidsVolume = 0, poidsReel = 0, tempPoids = 0;
 
-	poidsVolume = (double)(volume / 100) * 250.00;
+	poidsVolume = (volume) * 250.00;
 	if (poids < (int)poidsVolume)
-		poidsReel += poidsVolume;
+		poidsReel = poidsVolume;
 	else
-		poidsReel += (double)poids;
+		poidsReel = (double)poids;
 	if (poidsReel > 100)
 	{
 		tempPoids = ceil(poidsReel / 10.00);
