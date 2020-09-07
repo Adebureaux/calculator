@@ -63,34 +63,36 @@ GtkWidget	*geodis_international(GtkWidget *grid)
 {
 	GtkWidget	*calculate_button;
 
-	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\n\nGeodis International"), 2, 6, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\n\nGeodis International"), 3, 6, 1, 1);
+
+	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\t"), 0, 10, 1, 1);
 
 	country = gtk_entry_new();
 	gtk_entry_set_max_length((GtkEntry*)country, 12);
-	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\t\t\tDestination"), 0, 10, 1, 1);
-	gtk_grid_attach(GTK_GRID(grid), country, 0, 10, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\t\t\tDestination"), 1, 10, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), country, 1, 10, 1, 1);
 
 	vol = gtk_entry_new();
 	gtk_entry_set_max_length((GtkEntry*)vol, 4);
-	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\t\t\tVolume (m3)"), 1, 10, 1, 1);
-	gtk_grid_attach(GTK_GRID(grid), vol, 1, 10, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\t\t\tVolume (m3)"), 2, 10, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), vol, 2, 10, 1, 1);
 
 	weight = gtk_entry_new();
 	gtk_entry_set_max_length((GtkEntry*)weight, 4);
-	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\t\t\tPoids (KG)"), 2, 10, 1, 1);
-	gtk_grid_attach(GTK_GRID(grid), weight, 2, 10, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\t\t\tPoids (KG)"), 3, 10, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), weight, 3, 10, 1, 1);
 
 
 	calculate_button = gtk_button_new_with_label("Calculer");
 	g_signal_connect(calculate_button, "clicked", G_CALLBACK(get_price_i), NULL);
-	gtk_grid_attach(GTK_GRID(grid), calculate_button, 3, 10, 2, 1);
+	gtk_grid_attach(GTK_GRID(grid), calculate_button, 4, 10, 2, 1);
 
 	display_area = gtk_label_new("Pays\n");
-	gtk_grid_attach(GTK_GRID(grid), display_area, 5, 10, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), display_area, 6, 10, 1, 1);
 	display_price_ha = gtk_label_new("Cout d'achat :\n    0.00 €");
-	gtk_grid_attach(GTK_GRID(grid), display_price_ha, 6, 10, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), display_price_ha, 7, 10, 1, 1);
 	display_price = gtk_label_new("Prix de vente HT   : 0.00 €\nPrix de vente TTC : 0.00 €");
-	gtk_grid_attach(GTK_GRID(grid), display_price, 7, 10, 1, 1);
+	gtk_grid_attach(GTK_GRID(grid), display_price, 8, 10, 1, 1);
 
 	return (grid);
 }
