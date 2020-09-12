@@ -13,7 +13,8 @@ GtkWidget	*geodis_national(GtkWidget *grid);
 GtkWidget	*geodis_international(GtkWidget *grid);
 int			zone(int dep, int arr, int mode);
 double		tarif(int zoneMessagerie, int poids, int mode, int corse);
-int			calcPoids(int poids, double volume);
+int			calcPoids(int poidsReel);
 int			calcZone(char **pays);
-double  calcTarif(int poidsTranche, int zone);
+double		calcTarif(int poidsTranche, int zone);
+void		get_wei(void);
 #endif

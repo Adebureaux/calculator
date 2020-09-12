@@ -4,7 +4,6 @@ double	tarif(int zoneMessagerie, int poids, int mode, int corse)
 {
 	int			tranchePoids = 0;
 	double		prixBase = 0;
-	double		multiplier = 0;
 	double		tableMessagerie[12][16] =
 	{
 		{ 11.87, 13.00, 14.10, 15.21, 16.32, 19.63, 22.92, 24.92, 26.95, 28.95, 30.97, 32.96, 32.96, 31.31, 29.76, 28.26 },
@@ -111,5 +110,5 @@ double	tarif(int zoneMessagerie, int poids, int mode, int corse)
 		else
 			prixBase = tableMessagerieExpress[zoneMessagerie][tranchePoids];
 	}
-	return (prixBase * (poids / 100.00));
+	return poids > 100 ? (prixBase * (double)(poids / 100.00)) : (prixBase);
 }

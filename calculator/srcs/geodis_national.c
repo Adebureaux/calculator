@@ -3,7 +3,6 @@
 static GtkWidget	*dep;
 static GtkWidget	*arr;
 static GtkWidget	*weight;
-static GtkWidget	*mode;
 static GtkWidget	*display_area;
 static GtkWidget	*display_price_ha;
 static GtkWidget	*display_price;
@@ -27,10 +26,15 @@ void		get_price()
 	i_arr = atoi((char*)gtk_entry_get_text(GTK_ENTRY(arr)));
 	i_wei = atoi((char*)gtk_entry_get_text(GTK_ENTRY(weight)));
 	express = gtk_toggle_button_get_active((GtkToggleButton*)express_button);
+	price = 0;
 	if (i_dep < 1 || i_dep > 95 || i_arr < 1 || i_arr > 95 || i_wei < 0)
 	{
 		snprintf(buffer_area, sizeof(buffer_area), "Erreur\nSaisie");
+		snprintf(buffer_price_ha, sizeof(buffer_price_ha), "Cout d'achat :\n    %.2lf €", price);
+		snprintf(buffer_price, sizeof(buffer_price), "Prix de vente HT   : %.2lf €\nPrix de vente TTC : %.2lf €", price, (price * 1.2));
 		gtk_label_set_text(GTK_LABEL(display_area), buffer_area);
+		gtk_label_set_text(GTK_LABEL(display_price_ha), buffer_price_ha);
+		gtk_label_set_text(GTK_LABEL(display_price), buffer_price);
 		return ;
 	}
 
@@ -40,7 +44,7 @@ void		get_price()
 
 	corse = i_dep == 20 || i_arr == 20 ? 1 : 0;
 	price = tarif(i_area, i_wei, express, corse);
-	price = express ? (price * 1.13) + 11.99 : (price * 1.13) + 6.99;
+	price = express ? (price * 1.13) + 11.99 : (price * 1.13) + 3.99;
 	snprintf(buffer_price_ha, sizeof(buffer_price_ha), "Cout d'achat :\n    %.2lf €", price);
 	gtk_label_set_text(GTK_LABEL(display_price_ha), buffer_price_ha);
 
@@ -59,19 +63,19 @@ GtkWidget	*geodis_national(GtkWidget *grid)
 	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\n\nGeodis National"), 3, 0, 1, 1);
 
 	dep = gtk_entry_new();
-	gtk_entry_set_max_length((GtkEntry*)dep, 2);
+	gtk_entry_set_max_length(GTK_ENTRY(dep), 2);
 	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\tCode postal de depart"), 1, 5, 1, 1);
 	gtk_grid_attach(GTK_GRID(grid), dep, 1, 5, 1, 1);
 
 	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\t"), 0, 5, 1, 1);
 
 	arr = gtk_entry_new();
-	gtk_entry_set_max_length((GtkEntry*)arr, 2);
+	gtk_entry_set_max_length(GTK_ENTRY(arr), 2);
 	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\tCode postal d'arrivée"), 2, 5, 1, 1);
 	gtk_grid_attach(GTK_GRID(grid), arr, 2, 5, 1, 1);
 
 	weight = gtk_entry_new();
-	gtk_entry_set_max_length((GtkEntry*)weight, 3);
+	gtk_entry_set_max_length(GTK_ENTRY(weight), 3);
 	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\t\t\tPoids (KG)"), 3, 5, 1, 1);
 	gtk_grid_attach(GTK_GRID(grid), weight, 3, 5, 1, 1);
 

@@ -2,27 +2,15 @@
 
 static double	multiplier;
 
-int		calcPoids(int poids, double volume)
+int		calcPoids(int poidsReel)
 {
-		int		tranchePoids = 0;
-		double	poidsVolume = 0, poidsReel = 0, tempPoids = 0;
+	int		tranchePoids;
 
-	poidsVolume = (volume) * 250.00;
-	if (poids < (int)poidsVolume)
-		poidsReel = poidsVolume;
-	else
-		poidsReel = (double)poids;
+	tranchePoids = 0;
 	if (poidsReel > 100)
-	{
-		tempPoids = ceil(poidsReel / 10.00);
-		poidsReel = tempPoids * 10.00;
-		multiplier =  tempPoids / 10.00;
-	}
+		multiplier =  poidsReel / 100;
 	else
-	{
-		poidsReel = ceil(poidsReel);
 		multiplier = 1;
-	}
 	if (poidsReel >= 0 && poidsReel <= 9)
 		tranchePoids = 0;
 	else if (poidsReel > 9 && poidsReel <= 19)
@@ -58,14 +46,14 @@ int		calcPoids(int poids, double volume)
 	else if (poidsReel > 1999)
 		tranchePoids = 16;
 	else
-		return (0);
+		return (-1);
 	return (tranchePoids);
 }
 
 int		calcZone(char **pays)
 {
-	int		i;
-	int		zone;
+	int			i;
+	int			zone;
 	const char	*zonePays[34] =
 	{ "ALL", "AND", "AUT", "BEL", "BOS", "BUL", "CRO", "DAN", "ESP", "EST", "FIN", "HON", "IRL", "ITA", "KOS", "LET", "LIE", "LIT", "LUX", "MAC", "MON", "NOR", "PAY", "POL", "POR", "REP", "ROU", "ANG", "ECO", "SER", "SLO", "SUE", "SUI", 0 };
 
@@ -83,7 +71,6 @@ int		calcZone(char **pays)
 double	calcTarif(int poidsTranche, int zone)
 {
 	double			prixBase;
-	const double	tgo = 1.13;
 	const double	tablePrix[33][17] =
 	{
 		{ 46.61, 50.10, 53.57, 57.05, 60.52, 63.99, 67.48, 70.95, 74.42, 81.68, 81.68, 70.79, 63.80, 58.53, 58.16, 50.94, 44.10 },
@@ -120,6 +107,6 @@ double	calcTarif(int poidsTranche, int zone)
 		{ 71.52, 79.61, 87.71, 95.81, 103.89, 111.99, 120.09, 128.19, 136.28, 144.37, 124.23, 110.89, 99.96, 92.66, 93.04, 80.01, 68.01 }
 	};
 
-	prixBase = (tablePrix[zone][poidsTranche] * multiplier + 6.99) * tgo;
+	prixBase = ((tablePrix[zone][poidsTranche] * multiplier) * 1.13) + 3.99;
 	return (prixBase);
 }
