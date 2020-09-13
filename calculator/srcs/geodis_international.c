@@ -119,7 +119,7 @@ void		get_price_i(void)
 
 	i = 0;
 	cou = malloc(sizeof(char*));
-	cou[0] = calloc(20, 0);
+	cou[0] = malloc(20);
 	cou[0] = (char*)gtk_entry_get_text(GTK_ENTRY(country));
 	while (cou[0][i])
 	{
