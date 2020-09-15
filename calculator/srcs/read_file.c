@@ -41,7 +41,7 @@ double	read_file(char *file, int area, int weight)
 		if (c == ';')
 			count++;
 	}
-	while ((c = fgetc(fd)) != ';')
+	while ((c = fgetc(fd)) != ';' && c != '\n')
 	{
 		if (isalpha(c))
 		{
