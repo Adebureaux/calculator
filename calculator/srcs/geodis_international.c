@@ -11,6 +11,8 @@ static int			i_col;
 static int			totalwei;
 static int			tp;
 
+static char			**cou;
+
 static GtkWidget	*country;
 static GtkWidget	*col;
 static GtkWidget	*display_area;
@@ -38,7 +40,7 @@ void		get_wei_i(void)
 		totalwei += i_wei[i] < vol ? vol : i_wei[i];
 		i++;
 	}
-	if (totalwei > 2000)
+	if (totalwei > 2500)
 	{
 		gtk_window_close(GTK_WINDOW(window));
 		totalwei = -1;
@@ -110,7 +112,6 @@ void		get_price_i(void)
 {
 	int			i;
 	int			i_area;
-	char		**cou;
 	char		buffer_area[20];
 	char		buffer_price_ha[40];
 	char		buffer_price[80];
@@ -119,7 +120,7 @@ void		get_price_i(void)
 
 	i = 0;
 	cou = malloc(sizeof(char*));
-	cou[0] = malloc(20);
+	cou[0] = calloc(1, 20);
 	cou[0] = (char*)gtk_entry_get_text(GTK_ENTRY(country));
 	while (cou[0][i])
 	{
