@@ -6,13 +6,10 @@ static GtkWidget	*dim1[10];
 static GtkWidget	*dim2[10];
 static GtkWidget	*dim3[10];
 static GtkWidget	*wei[10];
-
 static int			i_col;
 static int			totalwei;
 static int			tp;
-
 static char			**cou;
-
 static GtkWidget	*country;
 static GtkWidget	*col;
 static GtkWidget	*display_area;
@@ -58,6 +55,7 @@ void		get_wei(void)
 
 	gtk_init(NULL, NULL);
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_modal(GTK_WINDOW(window), TRUE);
 	gtk_window_set_title(GTK_WINDOW(window), "CALCUL DU VOLUME");
 	gtk_window_set_default_size(GTK_WINDOW(window), 900, 300);
 	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
@@ -105,6 +103,7 @@ void		get_wei(void)
 	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\t"), 0, ((i_col + 2) * 5), 1, 1);
 
 	gtk_widget_show_all(window);
+	gtk_window_set_keep_above(GTK_WINDOW(window), TRUE);
 	gtk_main();
 }
 
