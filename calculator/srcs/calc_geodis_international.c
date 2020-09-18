@@ -55,7 +55,7 @@ int		calcZone(char **pays)
 	int			i;
 	int			zone;
 	const char	*zonePays[34] =
-	{ "ALL", "AND", "AUT", "BEL", "BOS", "BUL", "CRO", "DAN", "ESP", "EST", "FIN", "HON", "IRL", "ITA", "KOS", "LET", "LIE", "LIT", "LUX", "MAC", "MON", "NOR", "PAY", "POL", "POR", "REP", "ROU", "ANG", "SER", "SLO", "SUE", "SUI", 0 };
+	{ "ALL", "AND", "AUT", "BEL", "BOS", "BUL", "CRO", "DAN", "ESP", "EST", "FIN", "HON", "IRL", "ITA", "KOS", "LET", "LIE", "LIT", "LUX", "MAC", "MON", "NOR", "PAY", "POL", "POR", "REP", "ROU", "ANG", "ECO" "SER", "SLO", "SUE", "SUI", 0 };
 
 	i = 0;
 	zone = -1;
