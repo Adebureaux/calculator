@@ -37,11 +37,11 @@ void		get_wei_i(void)
 		totalwei += i_wei[i] < vol ? vol : i_wei[i];
 		i++;
 	}
-	if (totalwei > 2500)
+	if (totalwei > 2500 || totalwei <= 0)
 	{
 		gtk_window_close(GTK_WINDOW(window));
-		totalwei = -1;
-		get_wei();
+		tp = -1;
+		return ;
 	}
 	tp = calcPoids(totalwei);
 	gtk_window_close(GTK_WINDOW(window));
