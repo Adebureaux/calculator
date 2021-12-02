@@ -43,7 +43,7 @@ void		get_wei_i(void)
 		tp = -1;
 		return ;
 	}
-	tp = calcPoids(totalwei);
+	tp = international_weigth_range(totalwei);
 	gtk_window_close(GTK_WINDOW(window));
 }
 
@@ -126,7 +126,7 @@ void		get_price_i(void)
 		cou[0][i] = toupper(cou[0][i]);
 		i++;
 	}
-	i_area = calcZone(cou);
+	i_area = international_area(cou);
 	i_col = atoi((char*)gtk_entry_get_text(GTK_ENTRY(col)));
 	price = 0;
 	if (i_area == -1 || i_col < 1 || i_col > 10)
@@ -150,7 +150,7 @@ void		get_price_i(void)
 		gtk_label_set_text(GTK_LABEL(display_price), buffer_price);
 		return ;
 	}
-	price = calcTarif(tp, i_area);
+	price = international_price(tp, i_area);
 
 	snprintf(buffer_area, sizeof(buffer_area), "Pays\n %.3s", cou[0]);
 	gtk_label_set_text(GTK_LABEL(display_area), buffer_area);
@@ -166,7 +166,7 @@ void		get_price_i(void)
 	gtk_label_set_text(GTK_LABEL(display_price), buffer_price);
 }
 
-GtkWidget	*geodis_international(GtkWidget *grid)
+GtkWidget	*international(GtkWidget *grid)
 {
 	GtkWidget	*calculate_button;
 

@@ -8,7 +8,7 @@ static GtkWidget	*display_price_ha;
 static GtkWidget	*display_price;
 static GtkWidget	*express_button;
 
-void		get_price()
+void		get_price(void)
 {
 	int			i_dep;
 	int			i_arr;
@@ -56,7 +56,7 @@ void		get_price()
 	gtk_label_set_text(GTK_LABEL(display_price), buffer_price);
 }
 
-GtkWidget	*geodis_national(GtkWidget *grid)
+GtkWidget	*national(GtkWidget *grid)
 {
 	GtkWidget	*calculate_button;
 

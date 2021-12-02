@@ -1,6 +1,6 @@
 #include "main.h"
 
-double	read_file(char *file, int area, int weight)
+double	get_base_from_file(char *file, int area, int weight)
 {
 	FILE	*fd;
 	int		count;

@@ -5,8 +5,8 @@ int	main(int argc, char **argv)
 	GtkWidget	*window;
 	GtkWidget	*grid;
 
-	//HWND hWnd = GetConsoleWindow();
-	//ShowWindow(hWnd, SW_HIDE);
+	HWND hWnd = GetConsoleWindow();
+	ShowWindow(hWnd, SW_HIDE);
 
 	gtk_init(&argc, &argv);
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -19,8 +19,8 @@ int	main(int argc, char **argv)
 	gtk_grid_set_column_spacing((GtkGrid*)grid, 10);
 	gtk_grid_set_row_spacing((GtkGrid*)grid, 20);
 	gtk_container_add(GTK_CONTAINER(window), grid);
-	grid = geodis_national(grid);
-	grid = geodis_international(grid);
+	grid = national(grid);
+	grid = international(grid);
 	gtk_widget_show_all(window);
 	gtk_main();
 	return (0);
