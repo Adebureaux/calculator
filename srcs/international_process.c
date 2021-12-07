@@ -2,6 +2,23 @@
 
 static double	multiplier;
 
+int		international_area(char **country)
+{
+	int			i;
+	int			area;
+	const char	*country_zone[34] = { "ALL", "AND", "AUT", "BEL", "BOS", "BUL", "CRO", "DAN", "ESP", "EST", "FIN", "HON", "IRL", "ITA", "KOS", "LET", "LIE", "LIT", "LUX", "MAC", "MON", "NOR", "PAY", "POL", "POR", "REP", "ROU", "ANG", "ECO" "SER", "SLO", "SUE", "SUI", 0 };
+
+	i = 0;
+	area = -1;
+	while (country_zone[i])
+	{
+		if (strncmp(country[0], country_zone[i], 3) == 0)
+			area = i;
+		i++;
+	}
+	return (area);
+}
+
 int		international_weigth_range(int real_weight)
 {
 	int	range_weight;
@@ -48,23 +65,6 @@ int		international_weigth_range(int real_weight)
 	else
 		return (-1);
 	return (range_weight);
-}
-
-int		international_area(char **country)
-{
-	int			i;
-	int			area;
-	const char	*country_zone[34] = { "ALL", "AND", "AUT", "BEL", "BOS", "BUL", "CRO", "DAN", "ESP", "EST", "FIN", "HON", "IRL", "ITA", "KOS", "LET", "LIE", "LIT", "LUX", "MAC", "MON", "NOR", "PAY", "POL", "POR", "REP", "ROU", "ANG", "ECO" "SER", "SLO", "SUE", "SUI", 0 };
-
-	i = 0;
-	area = -1;
-	while (country_zone[i])
-	{
-		if (strncmp(country[0], country_zone[i], 3) == 0)
-			area = i;
-		i++;
-	}
-	return (area);
 }
 
 double	international_price(int range_weight, int area)

@@ -38,13 +38,12 @@ void		get_price(void)
 		return ;
 	}
 
-	i_area = zone(i_dep, i_arr, express);
+	i_area = national_area(i_dep, i_arr, express);
 	snprintf(buffer_area, sizeof(buffer_area), "Zone\n    %d", i_area);
 	gtk_label_set_text(GTK_LABEL(display_area), buffer_area);
 
 	corse = i_dep == 20 || i_arr == 20 ? 1 : 0;
-	price = tarif(i_area, i_wei, express, corse);
-	price = express ? (price * 1.13) + 11.99 : (price * 1.13) + 3.99;
+	price = national_price(i_area, i_wei, express, corse);
 	snprintf(buffer_price_ha, sizeof(buffer_price_ha), "Cout d'achat :\n    %.2lf €", price);
 	gtk_label_set_text(GTK_LABEL(display_price_ha), buffer_price_ha);
 
