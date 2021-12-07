@@ -1,13 +1,13 @@
 #include "main.h"
 
-double	get_base_from_file(char *file, int area, int weight)
+double	get_pos(char *file, int x, int y)
 {
 	FILE	*fd;
+	char	*val;
+	char	c;
+	double	ret;
 	int		count;
 	int		i;
-	char	c;
-	char	*val;
-	double	ret;
 
 	fd = fopen(file, "r");
 	if (!fd)
@@ -16,7 +16,7 @@ double	get_base_from_file(char *file, int area, int weight)
 	i = 0;
 	c = '\0';
 	val = malloc(10);
-	while (count < area)
+	while (count < x)
 	{
 		if (isalpha(c = fgetc(fd)))
 		{
@@ -29,7 +29,7 @@ double	get_base_from_file(char *file, int area, int weight)
 			count++;
 	}
 	count = 0;
-	while (count < weight)
+	while (count < y)
 	{
 		if (isalpha(c = fgetc(fd)))
 		{

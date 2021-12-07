@@ -49,16 +49,16 @@ double	tarif(int zoneMessagerie, int poids, int mode, int corse)
 	if (!corse)
 	{
 		if (!mode)
-			prixBase = get_base_from_file("ressources/table_messagerie.csv", zoneMessagerie, tranchePoids);
+			prixBase = get_pos("ressources/table_messagerie.csv", zoneMessagerie, tranchePoids);
 		else
-			prixBase = get_base_from_file("ressources/table_messagerie_express.csv", zoneMessagerie, tranchePoids);
+			prixBase = get_pos("ressources/table_messagerie_express.csv", zoneMessagerie, tranchePoids);
 	}
 	else
 	{
 		if (!mode)
-			prixBase = get_base_from_file("ressources/table_messagerie_corse.csv", zoneMessagerie, tranchePoids);
+			prixBase = get_pos("ressources/table_messagerie_corse.csv", zoneMessagerie, tranchePoids);
 		else
-			prixBase = get_base_from_file("ressources/table_messagerie_express_corse.csv", zoneMessagerie, tranchePoids);
+			prixBase = get_pos("ressources/table_messagerie_express_corse.csv", zoneMessagerie, tranchePoids);
 	}
 	return poids > 100 ? (prixBase * (double)(poids / 100.00)) : (prixBase);
 }

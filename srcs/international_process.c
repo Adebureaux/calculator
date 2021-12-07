@@ -71,6 +71,6 @@ double	international_price(int range_weight, int area)
 {
 	double	base;
 
-	base = get_base_from_file("ressources/table_international.csv", area, range_weight);
+	base = get_pos("ressources/table_international.csv", area, range_weight);
 	return ((base * multiplier * 1.13) + 3.99);
 }
