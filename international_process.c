@@ -67,10 +67,10 @@ int		international_weigth_range(int real_weight)
 	return (range_weight);
 }
 
-double	international_price(int range_weight, int area)
+double	international_price(int range_weight, int area, t_var *var)
 {
 	double	base;
 
 	base = get_pos("ressources/table_international.csv", area, range_weight);
-	return ((base * multiplier * 1.13) + 3.99);
+	return ((base * multiplier * var->tgo) + var->base_international);
 }

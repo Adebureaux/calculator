@@ -62,7 +62,7 @@ int		national_weigth_range(int weight, int mode)
 		return (weight_range);
 }
 
-double	national_price(int area, int weight, int mode, int corse)
+double	national_price(int area, int weight, int mode, int corse, t_var *var)
 {
 	int		weight_range;
 	double	base_price;
@@ -84,6 +84,6 @@ double	national_price(int area, int weight, int mode, int corse)
 		else
 			base_price = get_pos("ressources/table_messagerie_express_corse.csv", area, weight_range);
 	}
-	price = mode ? (base_price * 1.13) + 11.99 : (base_price * 1.13) + 3.99;
+	price = mode ? (base_price * var->tgo) + var->base_national_express : (base_price * var->tgo) + var->base_national;
 	return (weight > 100 ? (price * (double)(weight / 100.00)) : (price));
 }

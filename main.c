@@ -4,9 +4,12 @@ int	main(int argc, char **argv)
 {
 	GtkWidget	*window;
 	GtkWidget	*grid;
+	t_var		var;
 
-	//HWND hWnd = GetConsoleWindow();
-	//ShowWindow(hWnd, SW_HIDE);
+	HWND hWnd = GetConsoleWindow();
+	ShowWindow(hWnd, SW_HIDE);
+
+	get_var(&var);
 	gtk_init(&argc, &argv);
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_title(GTK_WINDOW(window), "CALCULATEUR DE PRIX");
@@ -18,8 +21,8 @@ int	main(int argc, char **argv)
 	gtk_grid_set_column_spacing((GtkGrid*)grid, 10);
 	gtk_grid_set_row_spacing((GtkGrid*)grid, 20);
 	gtk_container_add(GTK_CONTAINER(window), grid);
-	grid = national(grid);
-	grid = international(grid);
+	grid = national(grid, &var);
+	grid = international(grid, &var);
 	gtk_widget_show_all(window);
 	gtk_main();
 	return (0);

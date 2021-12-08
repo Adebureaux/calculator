@@ -7,6 +7,7 @@ static GtkWidget	*display_area;
 static GtkWidget	*display_price_ha;
 static GtkWidget	*display_price;
 static GtkWidget	*express_button;
+static t_var		*g_var;
 
 void		get_price(void)
 {
@@ -20,7 +21,6 @@ void		get_price(void)
 	char		buffer_price_ha[40];
 	char		buffer_price[80];
 	double		price;
-	double		divisor[40] = { 0.30, 0.40, 0.45, 0.50, 0.51, 0.52, 0.53, 0.54, 0.55, 0.56, 0.57, 0.58, 0.59, 0.60, 0.61, 0.62, 0.63, 0.64, 0.65, 0.66, 0.67, 0.68, 0.69, 0.70, 0.71, 0.72, 0.73, 0.735, 0.740, 0.745, 0.750, 0.755, 0.760, 0.765, 0.770, 0.775, 0.780, 0.785, 0.790, 0.795 };
 
 	i_dep = atoi((char*)gtk_entry_get_text(GTK_ENTRY(dep)));
 	i_arr = atoi((char*)gtk_entry_get_text(GTK_ENTRY(arr)));
@@ -43,22 +43,23 @@ void		get_price(void)
 	gtk_label_set_text(GTK_LABEL(display_area), buffer_area);
 
 	corse = i_dep == 20 || i_arr == 20 ? 1 : 0;
-	price = national_price(i_area, i_wei, express, corse);
+	price = national_price(i_area, i_wei, express, corse, g_var);
 	snprintf(buffer_price_ha, sizeof(buffer_price_ha), "Cout d'achat :\n    %.2lf €", price);
 	gtk_label_set_text(GTK_LABEL(display_price_ha), buffer_price_ha);
 
 	if (price < 500)
-		price /= divisor[(int)(price / 12.5)];
+		price /= g_var->divisor[(int)(price / 12.5)];
 	else
-		price /= 0.8;
+		price /= g_var->divisor[40];
 	snprintf(buffer_price, sizeof(buffer_price), "Prix de vente HT   : %.2lf €\nPrix de vente TTC : %.2lf €", price, (price * 1.2));
 	gtk_label_set_text(GTK_LABEL(display_price), buffer_price);
 }
 
-GtkWidget	*national(GtkWidget *grid)
+GtkWidget	*national(GtkWidget *grid, t_var *var)
 {
 	GtkWidget	*calculate_button;
 
+	g_var = var;
 	gtk_grid_attach(GTK_GRID(grid), gtk_label_new("\n\nGeodis National"), 3, 0, 1, 1);
 
 	dep = gtk_entry_new();
